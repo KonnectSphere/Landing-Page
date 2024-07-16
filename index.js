@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require("path");
-const mongoose = require("mongoose")
-const model = require("./models/details")
+const mongoose = require("mongoose");
+const model = require("./models/details");
 const mailer = require("./services/mailer");
 const app = express();
 
@@ -14,11 +14,10 @@ app.use("/public", express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 
 /* Setting up the connection with mongoose */
-main()
-    .catch(error => console.log(error));
+main().catch(error => console.log(error));
 
 async function main() {
-    await mongoose.connect("mongodb://127.0.0.1:27017/details");
+    await mongoose.connect("mongodb+srv://konnectsphere_admin:We_connect_10424@konnectsphere-initial-l.uogpdwb.mongodb.net/details");
 }
 
 /* Main route rendering!! -> index.html (home page) */
@@ -39,27 +38,23 @@ app.post("/contact", async (request, response) => {
     let influencer = model.Influencer;
 
     if (formtype == 'client') {
-        await client.insertMany([
-            {
-                name: result.name,
-                email: result.email,
-                contact: result.contact,
-                message: result.message
-            }
-        ]);
+        await client.insertMany([{
+            name: result.name,
+            email: result.email,
+            contact: result.contact,
+            message: result.message
+        }]);
 
         await mailer(formtype, result.email, result.name);
     } else {
-        await influencer.insertMany([
-            {
-                name: result.name,
-                email: result.email,
-                contact: result.contact,
-                youtube: result.youtube,
-                facebook: result.facebook,
-                instagram: result.instagram
-            }
-        ]);
+        await influencer.insertMany([{
+            name: result.name,
+            email: result.email,
+            contact: result.contact,
+            youtube: result.youtube,
+            facebook: result.facebook,
+            instagram: result.instagram
+        }]);
 
         await mailer(formtype, result.email, result.name);
     }

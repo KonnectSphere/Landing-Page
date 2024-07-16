@@ -1,11 +1,10 @@
 const mongoose = require("mongoose");
 
-/*Setting up the connection with mongoose */
-main()
-    .catch(error => console.log(error))
+/* Setting up the connection with mongoose */
+main().catch(error => console.log(error));
 
 async function main() {
-    await mongoose.connect("mongodb://127.0.0.1:27017/details");
+    await mongoose.connect("mongodb+srv://konnectsphere_admin:We_connect_10424@konnectsphere-initial-l.uogpdwb.mongodb.net/details");
 }
 
 const detailsInfluencer = mongoose.Schema({
@@ -28,7 +27,7 @@ const detailsUser = mongoose.Schema({
     message: String
 });
 
-const Client = mongoose.model("detailsUser", detailsUser)
-const Influencer = mongoose.model("detailsInfluencer", detailsInfluencer)
+const Client = mongoose.model("detailsUser", detailsUser);
+const Influencer = mongoose.model("detailsInfluencer", detailsInfluencer);
 
 module.exports = { Client, Influencer };
